@@ -11,6 +11,8 @@ const Registro = () => {
     senha: '',
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -18,14 +20,30 @@ const Registro = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!form.nome || !form.email || !form.senha) {
+      return alert("Preencha todos os campos.");
+    }
+
+    if (!form.email.includes('@')) {
+      return alert("Email inválido.");
+    }
+
+    if (form.senha.length < 6) {
+      return alert("A senha deve ter no mínimo 6 caracteres.");
+    }
+
+    setLoading(true);
+
     try {
-      await api.post('/usuarios', form); 
-      alert('Usuário cadastrado com sucesso!');
-      setForm({ nome: '', email: '', senha: '' });
+      await api.post('/usuarios', form);
+      alert("Usuário cadastrado com sucesso!");
+      setForm({ nome: '', email: '', senha: '' }); 
     } catch (error) {
-      alert('Erro ao cadastrar usuário.');
+      alert("Erro ao cadastrar. Tente novamente.");
       console.error(error);
     }
+
+    setLoading(false); 
   };
 
   return (
