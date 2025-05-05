@@ -19,7 +19,7 @@ const Registro = () => {
     e.preventDefault();
 
     try {
-      await api.post('/usuarios', form); // ajuste o endpoint conforme sua API
+      await api.post('/usuarios', form); 
       alert('Usuário cadastrado com sucesso!');
       setForm({ nome: '', email: '', senha: '' });
     } catch (error) {
