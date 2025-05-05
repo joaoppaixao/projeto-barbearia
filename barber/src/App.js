@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Horario from './pages/Horario';
 import InfoCliente from './pages/InfoCliente';
 import Servico from './pages/Servico';
+import Registro from './pages/Registro';
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
         <Route path="/infoCliente" element={<InfoCliente />} />
         <Route path="/horario" element={<Horario />} />
         <Route path="/servico" element={<Servico />} />
-
+        <Route path="/registro" element={<Registro />} />
       </Routes>
     </BrowserRouter>
   );
