@@ -1,4 +1,3 @@
-// src/pages/DashBarbeiro.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/DashBarbeiro.css';
@@ -7,7 +6,7 @@ const agendamentos = [
   {
     dia: 'Segunda',
     clientes: [
-      { nome: 'Matheus Consolim', link: '/info-cliente' },
+      { nome: 'Matheus Consolim', link: '/infoCliente' },
       { nome: 'Cliente 2', link: '#' },
       { nome: 'Cliente 3', link: '#' },
     ],

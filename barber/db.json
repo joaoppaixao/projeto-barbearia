@@ -1,4 +1,22 @@
 {
-    "usuarios": []
+  "usuarios": [
+    {
+      "id": "eb5a",
+      "nome": "Mazzo",
+      "email": "mazzolucas0@gmail.com",
+      "senha": "123456"
+    },
+    {
+      "id": "6145",
+      "nome": "Carlos Eduardo",
+      "email": "LORNAAGUIARSAFADAPUTA@GMAIL.COM",
+      "senha": "123456789"
+    },
+    {
+      "id": "0dc8",
+      "nome": "Dudinha Sentadeira",
+      "email": "Gostomcr3ud3itoesentasxqedqed@gmail.com",
+      "senha": "xsqdcqfvhge]"
+    }
+  ]
 }
-  
