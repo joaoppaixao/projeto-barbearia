@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Login from './pages/Login';
+import Agendamento from './pages/Agendamento';
+import DashBarbeiro from './pages/DashBarbeiro';
+import Home from './pages/Home';
+import Horario from './pages/Horario';
+import InfoCliente from './pages/InfoCliente';
+import Servico from './pages/Servico';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/dash" element={<DashBarbeiro />} />
+        <Route path="/agendamento" element={<Agendamento />} />
+        <Route path="/infoCliente" element={<InfoCliente />} />
+        <Route path="/horario" element={<Horario />} />
+        <Route path="/servico" element={<Servico />} />
+
+      </Routes>
+    </BrowserRouter>
   );
 }
-
 export default App;

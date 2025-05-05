@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  body {
+    
+    background-color: #dcdcdc;
+  }
+
+  .nav-bar {
+    padding: 10px;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.312);
+}
+
+.nav-bar > a {
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition-duration: 0.5;
+}
+
+.nav-bar > a:hover {
+    background-color: darkgray;
+    transition: 0.5s;
+}
+  
+  h1 {
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .dia {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .opcao {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 15px 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .opcao:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.02);
+  }
+  
+  .hora {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 10px;
+    font-weight: normal;
+  }
+  
+  .hora .opcao {
+    font-size: 14px;
+    padding: 10px;
+    text-align: center;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+  
+  .hora .opcao:hover {
+    background-color: #cce5cc;
+  }
+  

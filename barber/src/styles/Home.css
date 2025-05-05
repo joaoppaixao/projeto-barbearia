@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html, body {
+    background-color: lightgray;
+}
+
+.nav-bar {
+    padding: 10px;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.312);
+}
+
+.nav-bar > a {
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition-duration: 0.5;
+}
+
+.nav-bar > a:hover {
+    background-color: darkgray;
+    transition: 0.5s;
+}
+
+.main-content {
+    text-align: center;
+    padding: 30px;
+}
+
+.main-content h1 {
+    padding-bottom: 20px;
+}
+
+.mark {
+    margin: 200px;
+    font-size: 26px;
+    font-weight: bold;
+}
