@@ -1,4 +1,3 @@
-// src/pages/Registro.jsx
 import React, { useState } from 'react';
 import api from '../services/api';
 import '../styles/Registro.css';
