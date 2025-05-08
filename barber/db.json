@@ -48,6 +48,13 @@
       "email": "joao@gmail.com",
       "senha": "123456",
       "telefone": "14998253330"
+    },
+    {
+      "id": "f872",
+      "nome": "Bruna Moreira Marvulle",
+      "email": "bmarvulle@gmail.com",
+      "senha": "bruna123",
+      "telefone": "14998581676"
     }
   ]
 }
