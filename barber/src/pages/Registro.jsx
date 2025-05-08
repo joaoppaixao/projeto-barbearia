@@ -8,6 +8,7 @@ const Registro = () => {
     nome: '',
     email: '',
     senha: '',
+    telefone: '',
   });
 
   const [loading, setLoading] = useState(false);
@@ -45,6 +46,7 @@ const Registro = () => {
     setLoading(false); 
   };
 
+
   return (
     <div className="registro-container">
       <h1>Registro</h1>
@@ -62,6 +64,14 @@ const Registro = () => {
           name="email"
           placeholder="Email"
           value={form.email}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="telefone"
+          placeholder="Telefone"
+          value={form.telefone}
           onChange={handleChange}
           required
         />

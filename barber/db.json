@@ -29,6 +29,25 @@
       "nome": "oajoajsao",
       "email": "oajsoj@gmail.com",
       "senha": "aosoaksaok"
+    },
+    {
+      "id": "26a5",
+      "nome": "Matheus Consolim",
+      "email": "matheus.consolim@gmail.com",
+      "senha": "conso123"
+    },
+    {
+      "id": "e01f",
+      "nome": "teste07",
+      "email": "teste07@gmail.com",
+      "senha": "teste07"
+    },
+    {
+      "id": "4be5",
+      "nome": "joao",
+      "email": "joao@gmail.com",
+      "senha": "123456",
+      "telefone": "14998253330"
     }
   ]
 }
