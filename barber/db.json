@@ -56,5 +56,46 @@
       "senha": "bruna123",
       "telefone": "14998581676"
     }
+  ],
+  "barbeiros": [
+    {
+      "id": "b1",
+      "nome": "Mazzo"
+    },
+    {
+      "id": "b2",
+      "nome": "Carlos"
+    },
+    {
+      "id": "b3",
+      "nome": "Consolim"
+    }
+  ],
+  "servicos": [
+    {
+      "id": "s1",
+      "nome": "Corte de cabelo",
+      "preco": 30
+    },
+    {
+      "id": "s2",
+      "nome": "Barba",
+      "preco": 20
+    },
+    {
+      "id": "s3",
+      "nome": "Corte + Barba",
+      "preco": 45
+    }
+  ],
+  "agendamentos": [
+    {
+      "id": "befa",
+      "idCliente": "4be5",
+      "nomeCliente": "joao",
+      "barbeiroId": "b1",
+      "servicoId": "s2",
+      "dataHora": "2025-05-12T23:44"
+    }
   ]
 }

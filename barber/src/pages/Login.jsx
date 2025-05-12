@@ -18,16 +18,16 @@ const Login = () => {
   }, []);
 
   const handleLogin = () => {
-    const usuarioEncontrado = usuarios
-      .filter((usuario) => usuario.email === email)
-      .map((usuario) => usuario.senha === senha);
-
-    if (usuarioEncontrado.length > 0 && usuarioEncontrado[0]) {
-      alert('Login bem-sucedido!')
+    const usuarioEncontrado = usuarios.find(
+      (usuario) => usuario.email === email && usuario.senha === senha
+    );
+  
+    if (usuarioEncontrado) {
+      localStorage.setItem('usuarioLogado', JSON.stringify(usuarioEncontrado));
+      alert('Login bem-sucedido!');
       navigate('/home');
-
     } else {
-      setErro('Email ou senha inválidos.')
+      setErro('Email ou senha inválidos.');
       alert('Email ou senha inválidos.');
     }
   };

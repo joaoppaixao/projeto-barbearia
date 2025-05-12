@@ -73,6 +73,7 @@ const Registro = () => {
           placeholder="Telefone"
           value={form.telefone}
           onChange={handleChange}
+          maxLength = "11"
           required
         />
         <input
