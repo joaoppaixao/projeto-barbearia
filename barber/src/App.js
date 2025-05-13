@@ -2,11 +2,12 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Login from './pages/Login';
 import Agendamento from './pages/Agendamento';
 import DashBarbeiro from './pages/DashBarbeiro';
-import Home from './pages/Home';
+
 import Horario from './pages/Horario';
 import InfoCliente from './pages/InfoCliente';
 import Servico from './pages/Servico';
 import Registro from './pages/Registro';
+import Home from './pages/Home';
 
 
 function App() {

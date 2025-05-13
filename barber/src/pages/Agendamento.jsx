@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Agendamento.css';
 
 const AgendamentoCliente = () => {
@@ -7,46 +7,64 @@ const AgendamentoCliente = () => {
   const [servicos, setServicos] = useState([]);
   const [barbeiroSelecionado, setBarbeiroSelecionado] = useState('');
   const [servicoSelecionado, setServicoSelecionado] = useState('');
-  const [dataHora, setDataHora] = useState('');
+  const [dataSelecionada, setDataSelecionada] = useState('');
+  const [horaSelecionada, setHoraSelecionada] = useState('');
+  const [horariosDisponiveis, setHorariosDisponiveis] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     fetch('http://localhost:3001/barbeiros')
       .then(res => res.json())
-      .then(setBarbeiros);
+      .then(data => setBarbeiros(data));
 
     fetch('http://localhost:3001/servicos')
       .then(res => res.json())
-      .then(setServicos);
+      .then(data => setServicos(data));
   }, []);
 
-  const handleAgendamento = async () => {
-    const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
-    if (!usuario || !barbeiroSelecionado || !servicoSelecionado || !dataHora) {
-      alert('Preencha todos os campos.');
+  useEffect(() => {
+    if (barbeiroSelecionado && dataSelecionada) {
+      fetch('http://localhost:3001/horarios')
+        .then(res => res.json())
+        .then(data => {
+          const disponiveis = data.filter(h => h.disponivel).map(h => h.id);
+          setHorariosDisponiveis(disponiveis);
+        });
+    } else {
+      setHorariosDisponiveis([]);
+    }
+  }, [barbeiroSelecionado, dataSelecionada]);
+
+  const handleAgendar = () => {
+    if (!barbeiroSelecionado || !servicoSelecionado || !dataSelecionada || !horaSelecionada) {
+      alert('Preencha todos os campos!');
       return;
     }
 
-    const agendamento = {
-      idCliente: usuario.id,
-      nomeCliente: usuario.nome,
+    const novoAgendamento = {
+      idCliente: localStorage.getItem('usuarioId'),
       barbeiroId: barbeiroSelecionado,
       servicoId: servicoSelecionado,
-      dataHora
+      dataHora: `${dataSelecionada}T${horaSelecionada}`
     };
 
-    const res = await fetch('http://localhost:3001/agendamentos', {
+    fetch('http://localhost:3001/agendamentos', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(agendamento)
-    });
-
-    if (res.ok) {
-      alert('Agendamento realizado!');
-      navigate('/dash');
-    } else {
-      alert('Erro ao agendar.');
-    }
+      body: JSON.stringify(novoAgendamento)
+    })
+      .then(() => {
+        return fetch(`http://localhost:3001/horarios/${horaSelecionada}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ disponivel: false })
+        });
+      })
+      .then(() => {
+        alert('Agendamento realizado com sucesso!');
+        navigate('/home');
+      })
+      .catch(err => console.error('Erro ao agendar:', err));
   };
 
   return (
@@ -58,34 +76,40 @@ const AgendamentoCliente = () => {
         <Link to="/dash">Dashboard</Link>
       </div>
 
-      <h1>Agende seu horário</h1>
+      <h1>Fazer Agendamento</h1>
 
-      <div className="form-agendamento">
-        <label>Barbeiro:</label>
-        <select value={barbeiroSelecionado} onChange={(e) => setBarbeiroSelecionado(e.target.value)}>
-          <option value="">Selecione</option>
-          {barbeiros.map(b => (
-            <option key={b.id} value={b.id}>{b.nome}</option>
-          ))}
-        </select>
+      <label>Barbeiro:</label>
+      <select value={barbeiroSelecionado} onChange={(e) => setBarbeiroSelecionado(e.target.value)}>
+        <option value="">Selecione</option>
+        {barbeiros.map((b) => (
+          <option key={b.id} value={b.id}>{b.nome}</option>
+        ))}
+      </select>
 
-        <label>Serviço:</label>
-        <select value={servicoSelecionado} onChange={(e) => setServicoSelecionado(e.target.value)}>
-          <option value="">Selecione</option>
-          {servicos.map(s => (
-            <option key={s.id} value={s.id}>{s.nome} - R${s.preco}</option>
-          ))}
-        </select>
+      <label>Serviço:</label>
+      <select value={servicoSelecionado} onChange={(e) => setServicoSelecionado(e.target.value)}>
+        <option value="">Selecione</option>
+        {servicos.map((s) => (
+          <option key={s.id} value={s.id}>{s.nome}</option>
+        ))}
+      </select>
 
-        <label>Data e hora:</label>
-        <input
-          type="datetime-local"
-          value={dataHora}
-          onChange={(e) => setDataHora(e.target.value)}
-        />
+      <label>Data:</label>
+      <input type="date" value={dataSelecionada} onChange={(e) => setDataSelecionada(e.target.value)} />
 
-        <button onClick={handleAgendamento}>Confirmar</button>
-      </div>
+      <label>Horário:</label>
+      <select value={horaSelecionada} onChange={(e) => setHoraSelecionada(e.target.value)}>
+        <option value="">Selecione</option>
+        {horariosDisponiveis.length > 0 ? (
+          horariosDisponiveis.map((h, i) => (
+            <option key={i} value={h}>{h}</option>
+          ))
+        ) : (
+          <option disabled>Nenhum horário disponível</option>
+        )}
+      </select>
+
+      <button onClick={handleAgendar}>Agendar</button>
     </div>
   );
 };

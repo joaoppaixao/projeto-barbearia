@@ -21,8 +21,8 @@ useEffect(() => {
         <Link to="/agendamento">Fazer agendamento</Link>
         <Link to="/dash">Dashboard</Link>
       </div>
-    <div className="main-container">
 
+    <div className="main-container">
       <div className="main-content">
         <h1>Bem-vindo, {nomeUsuario}!</h1>
         <p>O app perfeito para você fazer seus agendamentos.</p>
