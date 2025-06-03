@@ -73,7 +73,7 @@ const AgendamentoCliente = () => {
         <Link to="/">Login</Link>
         <Link to="/home">Home</Link>
         <Link to="/agendamento">Fazer agendamento</Link>
-        <Link to="/dash">Dashboard</Link>
+
       </div>
 
       <h1>Fazer Agendamento</h1>

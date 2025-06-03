@@ -9,7 +9,7 @@ const InfoCliente = () => {
         <Link to="/">Login</Link>
         <Link to="/home">Home</Link>
         <Link to="/agendamento">Fazer agendamento</Link>
-        <Link to="/dash">Dashboard</Link>
+
       </div>
 
       <div className="info-container">

@@ -48,6 +48,7 @@ const Login = () => {
         onChange={(e) => setSenha(e.target.value)}
       />
       <button onClick={handleLogin}>Entrar</button>
+      <a id="registro" href="/Registro">Não tem uma conta? Cadastre-se</a>
     </div>
   );
 };

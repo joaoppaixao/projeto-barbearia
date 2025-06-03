@@ -10,7 +10,6 @@ const Servico = () => {
         <Link to="/">Login</Link>
         <Link to="/home">Home</Link>
         <Link to="/agendamento">Fazer agendamento</Link>
-        <Link to="/dash">Dashboard</Link>
       </div>
 
       <h1>Selecione o Serviço</h1>
