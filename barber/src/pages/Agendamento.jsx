@@ -23,48 +23,86 @@ const AgendamentoCliente = () => {
   }, []);
 
   useEffect(() => {
-    if (barbeiroSelecionado && dataSelecionada) {
-      fetch('http://localhost:3001/horarios')
-        .then(res => res.json())
-        .then(data => {
-          const disponiveis = data.filter(h => h.disponivel).map(h => h.id);
-          setHorariosDisponiveis(disponiveis);
-        });
-    } else {
-      setHorariosDisponiveis([]);
-    }
+    const gerarHorarios = () => {
+      const horarios = [];
+      for (let h = 8; h < 20; h++) {
+        horarios.push(`${h.toString().padStart(2, '0')}:00`);
+        horarios.push(`${h.toString().padStart(2, '0')}:30`);
+      }
+      horarios.push("20:00");
+      return horarios;
+    };
+
+    const buscarHorariosDisponiveis = async () => {
+      if (!barbeiroSelecionado || !dataSelecionada) {
+        setHorariosDisponiveis([]);
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:3001/agendamentos');
+        const agendamentos = await response.json();
+
+        const ocupados = agendamentos
+          .filter(ag =>
+            ag.barbeiroId === barbeiroSelecionado &&
+            ag.dataHora.startsWith(dataSelecionada)
+          )
+          .map(ag => ag.dataHora.split('T')[1]);
+
+        const todosHorarios = gerarHorarios();
+        const disponiveis = todosHorarios.filter(h => !ocupados.includes(h));
+        setHorariosDisponiveis(disponiveis);
+      } catch (error) {
+        console.error('Erro ao carregar horários:', error);
+        setHorariosDisponiveis([]);
+      }
+    };
+
+    buscarHorariosDisponiveis();
   }, [barbeiroSelecionado, dataSelecionada]);
 
-  const handleAgendar = () => {
+  const handleAgendar = async () => {
+    const usuarioId = localStorage.getItem('usuarioId');
+    console.log('🔍 ID do cliente:', usuarioId);
+
     if (!barbeiroSelecionado || !servicoSelecionado || !dataSelecionada || !horaSelecionada) {
       alert('Preencha todos os campos!');
       return;
     }
 
+    if (!usuarioId) {
+      alert('Erro: ID do cliente não encontrado. Faça login novamente.');
+      return;
+    }
+
     const novoAgendamento = {
-      idCliente: localStorage.getItem('usuarioId'),
+      idCliente: usuarioId,
       barbeiroId: barbeiroSelecionado,
       servicoId: servicoSelecionado,
       dataHora: `${dataSelecionada}T${horaSelecionada}`
     };
 
-    fetch('http://localhost:3001/agendamentos', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(novoAgendamento)
-    })
-      .then(() => {
-        return fetch(`http://localhost:3001/horarios/${horaSelecionada}`, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ disponivel: false })
-        });
-      })
-      .then(() => {
-        alert('Agendamento realizado com sucesso!');
-        navigate('/home');
-      })
-      .catch(err => console.error('Erro ao agendar:', err));
+    console.log('📦 Enviando agendamento:', novoAgendamento);
+
+    try {
+      const res = await fetch('http://localhost:3001/agendamentos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(novoAgendamento)
+      });
+
+      if (!res.ok) throw new Error(`Erro ${res.status} ao salvar`);
+
+      const data = await res.json();
+      console.log('✅ Agendamento salvo:', data);
+
+      alert('Agendamento realizado com sucesso!');
+      navigate('/home');
+    } catch (err) {
+      console.error('❌ Erro ao agendar:', err);
+      alert('Erro ao salvar agendamento. Veja o console.');
+    }
   };
 
   return (
@@ -73,7 +111,6 @@ const AgendamentoCliente = () => {
         <Link to="/">Login</Link>
         <Link to="/home">Home</Link>
         <Link to="/agendamento">Fazer agendamento</Link>
-
       </div>
 
       <h1>Fazer Agendamento</h1>
@@ -95,7 +132,12 @@ const AgendamentoCliente = () => {
       </select>
 
       <label>Data:</label>
-      <input type="date" value={dataSelecionada} onChange={(e) => setDataSelecionada(e.target.value)} />
+      <input
+        type="date"
+        value={dataSelecionada}
+        min={new Date().toISOString().split('T')[0]} // impede datas passadas
+        onChange={(e) => setDataSelecionada(e.target.value)}
+      />
 
       <label>Horário:</label>
       <select value={horaSelecionada} onChange={(e) => setHoraSelecionada(e.target.value)}>

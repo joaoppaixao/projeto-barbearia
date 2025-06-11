@@ -25,6 +25,7 @@ const Login = () => {
     if (usuarioEncontrado) {
       localStorage.setItem('usuarioLogado', JSON.stringify(usuarioEncontrado));
       alert('Login bem-sucedido!');
+      localStorage.setItem('usuarioId', usuarioEncontrado.id);
       navigate('/home');
     } else {
       setErro('Email ou senha inválidos.');

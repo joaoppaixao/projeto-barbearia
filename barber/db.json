@@ -90,43 +90,18 @@
   ],
   "agendamentos": [
     {
-      "id": "befa",
+      "id": "1c9c",
       "idCliente": "4be5",
-      "nomeCliente": "joao",
-      "barbeiroId": "b1",
-      "servicoId": "s2",
-      "dataHora": "2025-05-12T23:44"
+      "barbeiroId": "b2",
+      "servicoId": "s1",
+      "dataHora": "2025-06-12T12:00"
     },
     {
-      "id": "6bff",
+      "id": "53c5",
       "idCliente": "4be5",
-      "nomeCliente": "joao",
-      "barbeiroId": "b2",
-      "servicoId": "s3",
-      "dataHora": "2025-05-12T02:07"
+      "barbeiroId": "b3",
+      "servicoId": "s1",
+      "dataHora": "2025-06-12T10:00"
     }
-  ],
-  "horarios": [
-    { "id": "09:00", "disponivel": true },
-    { "id": "09:30", "disponivel": true },
-    { "id": "10:00", "disponivel": true },
-    { "id": "10:30", "disponivel": true },
-    { "id": "11:00", "disponivel": true },
-    { "id": "11:30", "disponivel": true },
-    { "id": "12:00", "disponivel": true },
-    { "id": "12:30", "disponivel": true },
-    { "id": "13:00", "disponivel": true },
-    { "id": "13:30", "disponivel": true },
-    { "id": "14:00", "disponivel": true },
-    { "id": "14:30", "disponivel": true },
-    { "id": "15:00", "disponivel": true },
-    { "id": "15:30", "disponivel": true },
-    { "id": "16:00", "disponivel": true },
-    { "id": "16:30", "disponivel": true },
-    { "id": "17:00", "disponivel": true },
-    { "id": "17:30", "disponivel": true },
-    { "id": "18:00", "disponivel": true },
-    { "id": "18:30", "disponivel": true }
   ]
-  
 }
