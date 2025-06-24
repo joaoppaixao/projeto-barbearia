@@ -1,74 +1,52 @@
 {
   "usuarios": [
     {
-      "id": "eb5a",
-      "nome": "Mazzo",
-      "email": "mazzolucas0@gmail.com",
-      "senha": "123456"
-    },
-    {
-      "id": "6145",
-      "nome": "Carlos Eduardo",
-      "email": "carloseduardo@gmail.com",
-      "senha": "123456789"
-    },
-    {
-      "id": "0dc8",
-      "nome": "João Paixão",
-      "email": "joaoaugustopp@gmail.com",
-      "senha": "xsqdcqfvhge]"
-    },
-    {
-      "id": "9e3c",
-      "nome": "aoskaosk",
-      "email": "oajsoaj@gmail.com",
-      "senha": "aojsoak"
-    },
-    {
-      "id": "eafa",
-      "nome": "oajoajsao",
-      "email": "oajsoj@gmail.com",
-      "senha": "aosoaksaok"
-    },
-    {
-      "id": "26a5",
-      "nome": "Matheus Consolim",
-      "email": "matheus.consolim@gmail.com",
-      "senha": "conso123"
-    },
-    {
-      "id": "e01f",
-      "nome": "teste07",
-      "email": "teste07@gmail.com",
-      "senha": "teste07"
-    },
-    {
-      "id": "4be5",
-      "nome": "joao",
+      "id": "cf79",
+      "nome": "joao paixao",
       "email": "joao@gmail.com",
       "senha": "123456",
-      "telefone": "14998253330"
+      "telefone": "14998253330",
+      "tipo": "cliente"
     },
     {
-      "id": "f872",
-      "nome": "Bruna Moreira Marvulle",
-      "email": "bmarvulle@gmail.com",
-      "senha": "bruna123",
-      "telefone": "14998581676"
-    }
-  ],
-  "barbeiros": [
-    {
-      "id": "b1",
-      "nome": "Mazzo"
+      "id": "4e02",
+      "nome": "rene",
+      "email": "rene@gmail.com",
+      "senha": "123456",
+      "telefone": "14998253330",
+      "tipo": "barbeiro"
     },
     {
-      "id": "b2",
-      "nome": "Carlos"
+      "id": "3584",
+      "nome": "matheus consolim",
+      "email": "conso@gmail.com",
+      "senha": "123456",
+      "telefone": "12214312421",
+      "tipo": "cliente"
     },
     {
-      "id": "b3",
-      "nome": "Consolim"
+      "id": "adeb",
+      "nome": "lucas mazzo",
+      "email": "mazzo@gmail.com",
+      "senha": "123456",
+      "telefone": "12982182818",
+      "tipo": "cliente"
+    },
+    {
+      "id": "7279",
+      "nome": "sansao",
+      "email": "sansao@gmail.com",
+      "senha": "123456",
+      "telefone": "19451948194",
+      "tipo": "barbeiro"
+    },
+    {
+      "id": "6179",
+      "nome": "herminio",
+      "email": "herminio@gmail.com",
+      "senha": "123456",
+      "telefone": "12349014971",
+      "tipo": "barbeiro"
     }
   ],
   "servicos": [
@@ -102,6 +80,48 @@
       "barbeiroId": "b3",
       "servicoId": "s1",
       "dataHora": "2025-06-12T10:00"
+    },
+    {
+      "id": "6341",
+      "idCliente": "3584",
+      "barbeiroId": "b2",
+      "servicoId": "s1",
+      "dataHora": "2025-06-26T10:00"
+    },
+    {
+      "id": "4e6c",
+      "idCliente": "cf79",
+      "barbeiroId": "4e02",
+      "servicoId": "s1",
+      "dataHora": "2025-06-26T10:00"
+    },
+    {
+      "id": "a3d0",
+      "idCliente": "cf79",
+      "barbeiroId": "7279",
+      "servicoId": "s1",
+      "dataHora": "2025-06-25T10:00"
+    },
+    {
+      "id": "d3d9",
+      "idCliente": "cf79",
+      "barbeiroId": "6179",
+      "servicoId": "s3",
+      "dataHora": "2025-06-27T09:30"
+    },
+    {
+      "id": "389d",
+      "idCliente": "cf79",
+      "barbeiroId": "6179",
+      "servicoId": "s1",
+      "dataHora": "2025-06-27T10:00"
+    },
+    {
+      "id": "076a",
+      "idCliente": "cf79",
+      "barbeiroId": "4e02",
+      "servicoId": "s1",
+      "dataHora": "2025-06-24T12:00"
     }
   ]
 }

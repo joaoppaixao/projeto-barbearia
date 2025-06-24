@@ -13,14 +13,14 @@ const AgendamentoCliente = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:3001/barbeiros')
-      .then(res => res.json())
-      .then(data => setBarbeiros(data));
+  fetch('http://localhost:3001/usuarios?tipo=barbeiro')
+    .then(res => res.json())
+    .then(data => setBarbeiros(data));
 
-    fetch('http://localhost:3001/servicos')
-      .then(res => res.json())
-      .then(data => setServicos(data));
-  }, []);
+  fetch('http://localhost:3001/servicos')
+    .then(res => res.json())
+    .then(data => setServicos(data));
+}, []);
 
   useEffect(() => {
     const gerarHorarios = () => {
@@ -117,11 +117,12 @@ const AgendamentoCliente = () => {
 
       <label>Barbeiro:</label>
       <select value={barbeiroSelecionado} onChange={(e) => setBarbeiroSelecionado(e.target.value)}>
-        <option value="">Selecione</option>
+      <option value="">Selecione</option>
         {barbeiros.map((b) => (
-          <option key={b.id} value={b.id}>{b.nome}</option>
-        ))}
+      <option key={b.id} value={b.id}>{b.nome}</option>
+      ))}
       </select>
+
 
       <label>Serviço:</label>
       <select value={servicoSelecionado} onChange={(e) => setServicoSelecionado(e.target.value)}>
@@ -135,7 +136,7 @@ const AgendamentoCliente = () => {
       <input
         type="date"
         value={dataSelecionada}
-        min={new Date().toISOString().split('T')[0]} // impede datas passadas
+        min={new Date().toISOString().split('T')[0]} 
         onChange={(e) => setDataSelecionada(e.target.value)}
       />
 

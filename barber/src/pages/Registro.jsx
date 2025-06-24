@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import '../styles/Registro.css';
-
 
 const Registro = () => {
   const [form, setForm] = useState({
@@ -9,43 +9,59 @@ const Registro = () => {
     email: '',
     senha: '',
     telefone: '',
+    tipo: 'cliente', // novo campo
   });
 
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!form.nome || !form.email || !form.senha) {
-      return alert("Preencha todos os campos.");
+  if (!form.nome || !form.email || !form.senha || !form.tipo) {
+    return alert("Preencha todos os campos.");
+  }
+
+  if (!form.email.includes('@')) {
+    return alert("Email inválido.");
+  }
+
+  if (form.senha.length < 6) {
+    return alert("A senha deve ter no mínimo 6 caracteres.");
+  }
+
+  setLoading(true);
+
+  try {
+    const { data: usuariosExistentes } = await api.get(`/usuarios?email=${form.email}`);
+    
+    if (usuariosExistentes.length > 0) {
+      alert("Este e-mail já está em uso. Tente outro.");
+      setLoading(false);
+      return;
     }
 
-    if (!form.email.includes('@')) {
-      return alert("Email inválido.");
-    }
+    await api.post('/usuarios', form);
+    alert("Usuário cadastrado com sucesso!");
+    setForm({
+      nome: '',
+      email: '',
+      senha: '',
+      telefone: '',
+      tipo: 'cliente'
+    });
+    navigate('/');
+  } catch (error) {
+    alert("Erro ao cadastrar. Tente novamente.");
+    console.error(error);
+  }
 
-    if (form.senha.length < 6) {
-      return alert("A senha deve ter no mínimo 6 caracteres.");
-    }
-
-    setLoading(true);
-
-    try {
-      await api.post('/usuarios', form);
-      alert("Usuário cadastrado com sucesso!");
-      setForm({ nome: '', email: '', senha: '' }); 
-    } catch (error) {
-      alert("Erro ao cadastrar. Tente novamente.");
-      console.error(error);
-    }
-
-    setLoading(false); 
-  };
-
+  setLoading(false);
+};
 
   return (
     <div className="registro-container">
@@ -73,7 +89,7 @@ const Registro = () => {
           placeholder="Telefone"
           value={form.telefone}
           onChange={handleChange}
-          maxLength = "11"
+          maxLength="11"
           required
         />
         <input
@@ -84,7 +100,13 @@ const Registro = () => {
           onChange={handleChange}
           required
         />
-        <button type="submit">Cadastrar</button>
+        <select name="tipo" value={form.tipo} onChange={handleChange} required>
+          <option value="cliente">Cliente</option>
+          <option value="barbeiro">Barbeiro</option>
+        </select>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Cadastrando...' : 'Cadastrar'}
+        </button>
       </form>
     </div>
   );
