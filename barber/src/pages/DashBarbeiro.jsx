@@ -82,7 +82,7 @@ const DashBarbeiro = () => {
         <Link to="/">Login</Link>
         <Link to="/home">Home</Link>
         <Link to="/agendamento">Fazer agendamento</Link>
-        <Link to="/dash">Dashboard</Link>
+        <Link to="/dash">Agendamentos</Link>
       </div>
 
       <h1>Agendamentos da Semana</h1>

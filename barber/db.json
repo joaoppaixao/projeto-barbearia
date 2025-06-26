@@ -96,13 +96,6 @@
       "dataHora": "2025-06-26T10:00"
     },
     {
-      "id": "a3d0",
-      "idCliente": "cf79",
-      "barbeiroId": "7279",
-      "servicoId": "s1",
-      "dataHora": "2025-06-25T10:00"
-    },
-    {
       "id": "d3d9",
       "idCliente": "cf79",
       "barbeiroId": "6179",
@@ -122,6 +115,13 @@
       "barbeiroId": "4e02",
       "servicoId": "s1",
       "dataHora": "2025-06-24T12:00"
+    },
+    {
+      "id": "71d2",
+      "idCliente": "cf79",
+      "barbeiroId": "4e02",
+      "servicoId": "s1",
+      "dataHora": "2025-06-26T10:30"
     }
   ]
 }
