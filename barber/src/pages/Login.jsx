@@ -11,7 +11,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:3001/usuarios')
+    fetch(`${process.env.REACT_APP_API_URL}/usuarios`)
       .then((res) => res.json())
       .then((data) => setUsuarios(data))
       .catch((err) => console.error('Erro ao buscar usuários:', err));
