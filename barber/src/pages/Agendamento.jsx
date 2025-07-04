@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Agendamento.css';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const AgendamentoCliente = () => {
   const [barbeiros, setBarbeiros] = useState([]);
   const [servicos, setServicos] = useState([]);
@@ -13,14 +15,18 @@ const AgendamentoCliente = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-  fetch('http://localhost:3001/usuarios?tipo=barbeiro')
-    .then(res => res.json())
-    .then(data => setBarbeiros(data));
+    // Buscar barbeiros do tipo "barbeiro"
+    fetch(`${API_URL}/usuarios?tipo=barbeiro`)
+      .then(res => res.json())
+      .then(data => setBarbeiros(data))
+      .catch(err => console.error('Erro ao buscar barbeiros:', err));
 
-  fetch('http://localhost:3001/servicos')
-    .then(res => res.json())
-    .then(data => setServicos(data));
-}, []);
+    // Buscar serviços disponíveis
+    fetch(`${API_URL}/servicos`)
+      .then(res => res.json())
+      .then(data => setServicos(data))
+      .catch(err => console.error('Erro ao buscar serviços:', err));
+  }, []);
 
   useEffect(() => {
     const gerarHorarios = () => {
@@ -40,9 +46,10 @@ const AgendamentoCliente = () => {
       }
 
       try {
-        const response = await fetch('http://localhost:3001/agendamentos');
+        const response = await fetch(`${API_URL}/agendamentos`);
         const agendamentos = await response.json();
 
+        // Filtra os horários já ocupados para o barbeiro na data selecionada
         const ocupados = agendamentos
           .filter(ag =>
             ag.barbeiroId === barbeiroSelecionado &&
@@ -86,7 +93,7 @@ const AgendamentoCliente = () => {
     console.log('📦 Enviando agendamento:', novoAgendamento);
 
     try {
-      const res = await fetch('http://localhost:3001/agendamentos', {
+      const res = await fetch(`${API_URL}/agendamentos`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(novoAgendamento)
@@ -117,12 +124,11 @@ const AgendamentoCliente = () => {
 
       <label>Barbeiro:</label>
       <select value={barbeiroSelecionado} onChange={(e) => setBarbeiroSelecionado(e.target.value)}>
-      <option value="">Selecione</option>
+        <option value="">Selecione</option>
         {barbeiros.map((b) => (
-      <option key={b.id} value={b.id}>{b.nome}</option>
-      ))}
+          <option key={b.id} value={b.id}>{b.nome}</option>
+        ))}
       </select>
-
 
       <label>Serviço:</label>
       <select value={servicoSelecionado} onChange={(e) => setServicoSelecionado(e.target.value)}>
@@ -136,7 +142,7 @@ const AgendamentoCliente = () => {
       <input
         type="date"
         value={dataSelecionada}
-        min={new Date().toISOString().split('T')[0]} 
+        min={new Date().toISOString().split('T')[0]}
         onChange={(e) => setDataSelecionada(e.target.value)}
       />
 
