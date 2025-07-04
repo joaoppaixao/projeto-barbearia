@@ -1,4 +1,4 @@
-<div style="font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 20px;">
+<div style="font-family: Arial, sans-serif; line-height: 1.6; padding: 20px;">
   <h1 style="color: #333;">💈 Projeto Barbearia - Sistema de Agendamento</h1>
   <p>Este projeto é um sistema completo de agendamentos online para uma barbearia, desenvolvido com <strong>React</strong> no front-end e <strong>JSON Server</strong> como back-end simulado. O objetivo é permitir que <strong>clientes agendem serviços</strong> com barbeiros disponíveis e que os <strong>barbeiros gerenciem seus próprios agendamentos</strong>.</p>
 
