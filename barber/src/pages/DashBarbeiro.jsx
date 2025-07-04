@@ -4,6 +4,8 @@ import '../styles/DashBarbeiro.css';
 
 const diasSemana = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const DashBarbeiro = () => {
   const [agendamentos, setAgendamentos] = useState([]);
   const [clientes, setClientes] = useState([]);
@@ -12,16 +14,20 @@ const DashBarbeiro = () => {
 
   useEffect(() => {
     const carregarDados = async () => {
-      const [agRes, cliRes, servRes] = await Promise.all([
-        fetch('http://localhost:3001/agendamentos').then(res => res.json()),
-        fetch('http://localhost:3001/usuarios').then(res => res.json()),
-        fetch('http://localhost:3001/servicos').then(res => res.json()),
-      ]);
+      try {
+        const [agRes, cliRes, servRes] = await Promise.all([
+          fetch(`${API_URL}/agendamentos`).then(res => res.json()),
+          fetch(`${API_URL}/usuarios`).then(res => res.json()),
+          fetch(`${API_URL}/servicos`).then(res => res.json()),
+        ]);
 
-      const agDoBarbeiro = agRes.filter(ag => ag.barbeiroId === barbeiroId);
-      setAgendamentos(agDoBarbeiro);
-      setClientes(cliRes);
-      setServicos(servRes);
+        const agDoBarbeiro = agRes.filter(ag => ag.barbeiroId === barbeiroId);
+        setAgendamentos(agDoBarbeiro);
+        setClientes(cliRes);
+        setServicos(servRes);
+      } catch (error) {
+        console.error('Erro ao carregar dados:', error);
+      }
     };
 
     carregarDados();
@@ -40,7 +46,7 @@ const DashBarbeiro = () => {
   const concluirAgendamento = async (id) => {
     if (!window.confirm('Marcar como concluído? Isso removerá o agendamento.')) return;
     try {
-      await fetch(`http://localhost:3001/agendamentos/${id}`, {
+      await fetch(`${API_URL}/agendamentos/${id}`, {
         method: 'DELETE',
       });
       setAgendamentos(prev => prev.filter(ag => ag.id !== id));
@@ -53,7 +59,7 @@ const DashBarbeiro = () => {
   const cancelarAgendamento = async (id) => {
     if (!window.confirm('Deseja cancelar este agendamento?')) return;
     try {
-      await fetch(`http://localhost:3001/agendamentos/${id}`, {
+      await fetch(`${API_URL}/agendamentos/${id}`, {
         method: 'DELETE',
       });
       setAgendamentos(prev => prev.filter(ag => ag.id !== id));
@@ -63,6 +69,7 @@ const DashBarbeiro = () => {
     }
   };
 
+  // Inicializa o objeto com arrays para cada dia da semana
   const agendamentosPorDia = diasSemana.reduce((acc, dia) => {
     acc[dia] = [];
     return acc;
@@ -70,8 +77,11 @@ const DashBarbeiro = () => {
 
   agendamentos.forEach((ag) => {
     const date = new Date(ag.dataHora);
-    const diaSemana = diasSemana[date.getDay() - 1];
-    if (diaSemana) {
+    const diaSemanaIndex = date.getDay(); // 0=Domingo, 1=Segunda ...
+    // Ajusta para nosso array que começa na segunda-feira (índice 0)
+    // Ignora domingo (0) pois não está listado
+    if (diaSemanaIndex >= 1 && diaSemanaIndex <= 6) {
+      const diaSemana = diasSemana[diaSemanaIndex - 1];
       agendamentosPorDia[diaSemana].push(ag);
     }
   });
