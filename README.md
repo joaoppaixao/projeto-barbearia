@@ -2,7 +2,7 @@
   <h1 style="color: #333;">💈 Projeto Barbearia - Sistema de Agendamento</h1>
   <p>Este projeto é um sistema completo de agendamentos online para uma barbearia, desenvolvido com <strong>React</strong> no front-end e <strong>JSON Server</strong> como back-end simulado. O objetivo é permitir que <strong>clientes agendem serviços</strong> com barbeiros disponíveis e que os <strong>barbeiros gerenciem seus próprios agendamentos</strong>.</p>
 
-  <h2 style="color: #444;">⚙️ Tecnologias Utilizadas</h2>
+  <h2 style="color: #444;">⚙️ Tecnologias Utilizadas </h2>
   <ul>
     <li><strong>React.js</strong> – Interface moderna e responsiva.</li>
     <li><strong>React Router Dom</strong> – Navegação entre páginas (Login, Home, Agendamento, Dashboard).</li>
